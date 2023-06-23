@@ -1,4 +1,4 @@
-# Hooks: Fetching Data and Custom Hooks
+# React Hooks: Fetching Data and Custom Hooks
 
 In this exercise, you will learn how to fetch data from an API using React Hooks.
 You will also learn how to create your own custom hooks, which are a great way to share logic between components.
@@ -215,8 +215,6 @@ function ToDoList() {
   );
 }
 ```
-
-When you're ready, switch to the `2-hooks-complete` branch to continue.
 
 # Review
 

@@ -22,7 +22,7 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function Form({addTodoItem}) {
+      function Form({ addTodoItem }) {
         const [value, setValue] = React.useState("");
 
         function handleSubmit(event) {
@@ -48,27 +48,34 @@
       function List({ todos }) {
         return (
           <ol>
-            {todos.map(({ id, text }) => (
-              <ListItem key={id} text={text}></ListItem>
+            {todos.map(({ id, title }) => (
+              <ListItem key={id} title={title}></ListItem>
             ))}
           </ol>
         );
       }
 
-      function ListItem({ text }) {
-        return <li>{text}</li>;
+      function ListItem({ title }) {
+        return <li>{title}</li>;
+      }
+
+      function useToDos() {
+        const [todos, setTodos] = React.useState([]);
+
+        React.useEffect(() => {
+          fetch("https://jsonplaceholder.typicode.com/todos")
+            .then((response) => response.json())
+            .then((data) => setTodos(data));
+        }, []);
+
+        return [todos, setTodos];
       }
 
       function ToDoList() {
-        const [todos, setTodos] = React.useState([
-          { id: 1, text: "Buy milk" },
-          { id: 2, text: "Buy eggs" },
-          { id: 3, text: "Buy bread" },
-          { id: 4, text: "Go to the gym" },
-        ]);
+        const [todos, setTodos] = useToDos();
 
-        function addTodoItem(text) {
-          setTodos([...todos, { id: todos.length + 1, text }]);
+        function addTodoItem(title) {
+          setTodos([...todos, { id: todos.length + 1, title }]);
         }
 
         return (
